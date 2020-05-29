@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  biocsoft:
+    image: bioconductor/bioconductor_docker:devel
+    environment:
+      - DISABLE_AUTH=true
+    ports:
+      - '8787:8787'
+    volumes:
+      - static-content:/root/.TinyTex
+    # depends_on:
+    #   - vigbuild
+  
+  vigbuild:
+    image: nitesh1989/bioconductor-latex:latest
+    volumes:
+      - static-content:/root/.TinyTex/
+
+volumes:
+  static-content:
